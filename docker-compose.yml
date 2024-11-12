@@ -1,0 +1,17 @@
+services:
+  # comment if you don't want to create central node
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount the configuration file
+    network_mode: "host"
+    ports:
+      - "9090:9090"
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    network_mode: "host"  # Use host networking to get accurate metrics from the host system
+    ports:
+      - "9100:9100"
